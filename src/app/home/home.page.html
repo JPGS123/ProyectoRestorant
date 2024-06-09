@@ -1,20 +1,72 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
+<ion-menu contentId="main-content">
+  <ion-header>
     <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
+      <ion-title>Categorías</ion-title>
     </ion-toolbar>
   </ion-header>
+  <ion-content class="ion-padding">
+    <ion-list>
+      <ion-item>
+        <ion-thumbnail slot="start">
+          <img src="assets/img/Entradas.png" alt="Entradas">
+        </ion-thumbnail>
+        <ion-label>Entradas</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-thumbnail slot="start">
+          <img src="assets/img/PlatosPrincipales.png" alt="Platos Principales">
+        </ion-thumbnail>
+        <ion-label>Platos Principales</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-thumbnail slot="start">
+          <img src="assets/img/Postres.png" alt="Postres">
+        </ion-thumbnail>
+        <ion-label>Postres</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-thumbnail slot="start">
+          <img src="assets/img/Bebestibles.png" alt="Bebestibles">
+        </ion-thumbnail>
+        <ion-label>Bebestibles</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-thumbnail slot="start">
+          <img src="assets/img/Bajativos.png" alt="Bajativos">
+        </ion-thumbnail>
+        <ion-label>Bajativos</ion-label>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-menu>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
-</ion-content>
+
+<div class="ion-page" id="main-content">
+  <ion-header [translucent]="true">
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title>
+        Menu
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content [fullscreen]="true" class="ion-padding">
+    <div id="container">
+      <h2>Acerca de nosotros</h2>
+      <p>
+        Restaurante de alta gama especializado en comida buffet para servir o llevar, ubicado en xxxxxx.
+      </p>
+      <h3>Horario de Atención:</h3>
+      <p class="opening-hours">
+        Lunes a Viernes: 8:00 AM - 10:00 PM
+        <br>
+        Sábado y Domingo: 10:00 AM - 11:00 PM
+      </p>
+    </div>
+  </ion-content>
+
+</div>
+

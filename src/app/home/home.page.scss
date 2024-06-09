@@ -25,3 +25,24 @@
 #container a {
   text-decoration: none;
 }
+
+#container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.opening-hours {
+  margin-top: 20px;
+  text-align: center;
+}
+
+#container h2 {
+  font-size: 24px;
+}
+
+#container h3 {
+  font-size: 20px;
+}
