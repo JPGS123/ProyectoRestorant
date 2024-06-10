@@ -6,31 +6,31 @@
   </ion-header>
   <ion-content class="ion-padding">
     <ion-list>
-      <ion-item>
+      <ion-item button routerLink="/entradas">
         <ion-thumbnail slot="start">
           <img src="assets/img/Entradas.png" alt="Entradas">
         </ion-thumbnail>
         <ion-label>Entradas</ion-label>
       </ion-item>
-      <ion-item>
+      <ion-item button routerLink="/platos-principales">
         <ion-thumbnail slot="start">
           <img src="assets/img/PlatosPrincipales.png" alt="Platos Principales">
         </ion-thumbnail>
         <ion-label>Platos Principales</ion-label>
       </ion-item>
-      <ion-item>
+      <ion-item button routerLink="/postres">
         <ion-thumbnail slot="start">
           <img src="assets/img/Postres.png" alt="Postres">
         </ion-thumbnail>
         <ion-label>Postres</ion-label>
       </ion-item>
-      <ion-item>
+      <ion-item button routerLink="/bebestibles">
         <ion-thumbnail slot="start">
           <img src="assets/img/Bebestibles.png" alt="Bebestibles">
         </ion-thumbnail>
         <ion-label>Bebestibles</ion-label>
       </ion-item>
-      <ion-item>
+      <ion-item button routerLink="/bajativos">
         <ion-thumbnail slot="start">
           <img src="assets/img/Bajativos.png" alt="Bajativos">
         </ion-thumbnail>
@@ -39,6 +39,7 @@
     </ion-list>
   </ion-content>
 </ion-menu>
+
 
 
 <div class="ion-page" id="main-content">
@@ -54,7 +55,7 @@
   </ion-header>
   
   <ion-content [fullscreen]="true" class="ion-padding">
-    <div id="container">
+    <div id="container" class="white-background">
       <h2>Acerca de nosotros</h2>
       <p>
         Restaurante de alta gama especializado en comida buffet para servir o llevar, ubicado en xxxxxx.
@@ -68,5 +69,21 @@
     </div>
   </ion-content>
 
+  <ion-tabs>
+    <ion-tab-bar slot="bottom">
+      <ion-tab-button tab="Perfil">
+        <ion-icon name="person"></ion-icon>
+        Perfil
+      </ion-tab-button>
+      <ion-tab-button tab="">
+        <ion-icon name="basket"></ion-icon>
+        Promociones
+      </ion-tab-button>
+      <ion-tab-button tab="CarroCompras">
+        <ion-icon name="cart"></ion-icon>
+        Carro
+      </ion-tab-button>
+    </ion-tab-bar>
+  </ion-tabs>
 </div>
 

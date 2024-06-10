@@ -19,6 +19,30 @@ const routes: Routes = [
     path: 'register',
     loadChildren: () => import('./register/register.module').then( m => m.RegisterPageModule)
   },
+  {
+    path: 'entradas',
+    loadChildren: () => import('./entradas/entradas.module').then( m => m.EntradasPageModule)
+  },
+  {
+    path: 'perfil',
+    loadChildren: () => import('./perfil/perfil.module').then( m => m.PerfilPageModule)
+  },
+  {
+    path: 'platos-principales',
+    loadChildren: () => import('./platos-principales/platos-principales.module').then( m => m.PlatosPrincipalesPageModule)
+  },
+  {
+    path: 'postres',
+    loadChildren: () => import('./postres/postres.module').then( m => m.PostresPageModule)
+  },
+  {
+    path: 'bebestibles',
+    loadChildren: () => import('./bebestibles/bebestibles.module').then( m => m.BebestiblesPageModule)
+  },
+  {
+    path: 'bajativos',
+    loadChildren: () => import('./bajativos/bajativos.module').then( m => m.BajativosPageModule)
+  },
 ];
 
 @NgModule({
