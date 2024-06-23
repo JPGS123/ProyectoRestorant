@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
+import { DatabaseService } from '../services/database.service';
 
 @Component({
   selector: 'app-register',
@@ -11,14 +12,23 @@ export class RegisterPage implements OnInit {
   password: string = '';
   confirmPassword: string = '';
 
-  constructor(private navCtrl: NavController) { }
+  constructor(private navCtrl: NavController, private databaseService: DatabaseService) { }
 
   ngOnInit() { }
 
-  onRegister() {
-    console.log('Registro con:', this.email, this.password);
+  async onRegister() {
+    if (this.isFormValid()) {
+      try {
+        await this.databaseService.addUser(this.email, this.password);
+        console.log('Usuario registrado:', this.email);
 
-    this.navCtrl.navigateForward('/login');
+        this.navCtrl.navigateForward('/login');
+      } catch (error) {
+        console.error('Error al registrar usuario:', error);
+      }
+    } else {
+      console.error('Formulario no válido. Verifica los campos.');
+    }
   }
 
   isFormValid(): boolean {

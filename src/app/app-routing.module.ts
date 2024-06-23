@@ -1,15 +1,20 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from './guard/auth.guard';
+import { HomePage } from './home/home.page';
+import { LoginPage } from './login/login.page';
+import { UsersPage } from './users/users.page';
 
 const routes: Routes = [
-  {
-    path: 'home',
-    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
-  },
+  
   {
     path: '',
     redirectTo: 'login',
     pathMatch: 'full'
+  },
+  {
+    path: 'home',
+    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
   },
   {
     path: 'login',
@@ -43,6 +48,14 @@ const routes: Routes = [
     path: 'bajativos',
     loadChildren: () => import('./bajativos/bajativos.module').then( m => m.BajativosPageModule)
   },
+  {
+    path: 'users',
+    loadChildren: () => import('./users/users.module').then( m => m.UsersPageModule)
+  },
+  {
+    path: 'users',
+    component: UsersPage
+  }
 ];
 
 @NgModule({

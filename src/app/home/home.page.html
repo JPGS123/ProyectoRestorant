@@ -51,12 +51,17 @@
       <ion-title>
         Menu
       </ion-title>
+      <ion-buttons slot="end">
+        <ion-button (click)="logout()">
+          <ion-icon slot="icon-only" name="log-out-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
     </ion-toolbar>
   </ion-header>
   
   <ion-content [fullscreen]="true" class="ion-padding">
     <div id="container" class="white-background">
-      <h2>Acerca de nosotros</h2>
+      <h2>Acerca de Nosotros</h2>
       <p>
         Restaurante de alta gama especializado en comida buffet para servir o llevar, ubicado en xxxxxx.
       </p>
