@@ -64,25 +64,20 @@ export class DatabaseService {
     }
   }
 
-  async getUser(email: string): Promise<User | null> {
+  async getUserByEmail(email: string): Promise<User | null> {
     try {
-      if (this.db) {
-        const query = `SELECT * FROM users WHERE email = ?`;
-        const values = [email];
-        const result = await this.db.query(query, values);
-
-        if (result && result.values && result.values.length > 0) {
-          const user = result.values[0] as User;
-          return user;
-        } else {
-          return null;
-        }
+      const query = `SELECT * FROM users WHERE email = ?`;
+      const values = [email];
+      const result = await this.db?.query(query, values);
+      if (result && result.values && result.values.length > 0) {
+        return result.values[0] as User;
+      } else {
+        return null;
       }
     } catch (error) {
-      console.error('Error fetching user:', error);
+      console.error('Error fetching user by email:', error);
       return null;
     }
-    return null;
   }
 
   async getUsers(): Promise<User[]> {

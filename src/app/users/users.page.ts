@@ -15,13 +15,13 @@ export class UsersPage implements OnInit {
     private databaseService: DatabaseService
   ) {}
 
+  async loadUsers() {
+    this.users = await this.databaseService.getUsers();
+  }
+
   async ngOnInit() {
     await this.databaseService.initDatabase();
     this.loadUsers();
-  }
-
-  async loadUsers() {
-    this.users = await this.databaseService.getUsers();
   }
 
   async deleteUser(user: User) {

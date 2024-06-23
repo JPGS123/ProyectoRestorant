@@ -10,7 +10,7 @@ export class AuthService {
   constructor(private databaseService: DatabaseService) { }
 
   async login(email: string, password: string): Promise<boolean> {
-    const user = await this.databaseService.getUser(email);
+    const user = await this.databaseService.getUserByEmail(email);
     if (user && user.password === password) {
       localStorage.setItem(this.tokenKey, 'user-token');
       return true;
