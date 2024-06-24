@@ -8,8 +8,17 @@ import { Router } from '@angular/router';
   styleUrls: ['./home.page.scss'],
 })
 export class HomePage {
+  private loggedIn = false;
 
   constructor(private authService: AuthService, private router: Router) { }
+
+  isLoggedIn(): boolean {
+    return this.loggedIn;
+  }
+
+  login(email: string, password: string): void {
+    this.loggedIn = true;
+  }
 
   logout() {
     this.authService.logout();

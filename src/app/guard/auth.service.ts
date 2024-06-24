@@ -1,28 +1,56 @@
 import { Injectable } from '@angular/core';
-import { DatabaseService } from '../services/database.service';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private tokenKey = 'auth-token';
+  private apiUrl = 'http://localhost:3000/';
+  private loggedIn = false;
+  private accessTokenKey = 'accessToken';
 
-  constructor(private databaseService: DatabaseService) { }
+  constructor(private http: HttpClient) {}
 
-  async login(email: string, password: string): Promise<boolean> {
-    const user = await this.databaseService.getUserByEmail(email);
-    if (user && user.password === password) {
-      localStorage.setItem(this.tokenKey, 'user-token');
-      return true;
-    }
-    return false;
+  register(email: string, password: string): Observable<any> {
+    const body = { email, password };
+    return this.http.post(`${this.apiUrl}users`, body);
   }
 
-  logout(): void {
-    localStorage.removeItem(this.tokenKey);
+  login(email: string, password: string): Observable<any> {
+    return this.http.get<any[]>(`${this.apiUrl}users`).pipe(
+      map(users => {
+        const user = users.find(u => u.email === email && u.password === password);
+        if (user) {
+          return { success: true, user };
+        } else {
+          return { success: false };
+        }
+      })
+    );
+  }
+
+  saveAccessToken(token: string): void {
+    localStorage.setItem(this.accessTokenKey, token);
+    this.loggedIn = true;
+  }
+
+  getAccessToken(): string | null {
+    return localStorage.getItem(this.accessTokenKey);
+  }
+
+  clearAccessToken(): void {
+    localStorage.removeItem(this.accessTokenKey);
+    this.loggedIn = false;
   }
 
   isLoggedIn(): boolean {
-    return !!localStorage.getItem(this.tokenKey);
+    return this.loggedIn;
+  }
+
+  logout(): void {
+    this.clearAccessToken();
+    this.loggedIn = false;
   }
 }

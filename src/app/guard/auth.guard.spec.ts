@@ -14,8 +14,7 @@ describe('AuthGuard', () => {
       providers: [
         AuthGuard,
         AuthService,
-        Router
-      ]
+      ],
     });
 
     guard = TestBed.inject(AuthGuard);
@@ -28,7 +27,7 @@ describe('AuthGuard', () => {
   });
 
   it('should allow activation when user is logged in', () => {
-    spyOn(authService, 'isLoggedIn').and.returnValue(true);
+    authService['loggedIn'] = true;
 
     const canActivate = guard.canActivate(
       {} as ActivatedRouteSnapshot,
@@ -39,7 +38,8 @@ describe('AuthGuard', () => {
   });
 
   it('should navigate to login page when user is not logged in', () => {
-    spyOn(authService, 'isLoggedIn').and.returnValue(false);
+    authService['loggedIn'] = false;
+
     spyOn(router, 'navigate');
 
     const canActivate = guard.canActivate(

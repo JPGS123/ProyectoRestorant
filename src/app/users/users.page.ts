@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertController } from '@ionic/angular';
-import { DatabaseService, User } from '../services/database.service';
+// import { DatabaseService, User } from '../services/database.service';
+import { User } from '../services/database.service'; // Solo importa la interfaz User si la necesitas
 
 @Component({
   selector: 'app-users',
@@ -12,16 +13,16 @@ export class UsersPage implements OnInit {
 
   constructor(
     private alertController: AlertController,
-    private databaseService: DatabaseService
+    // private databaseService: DatabaseService
   ) {}
 
-  async loadUsers() {
-    this.users = await this.databaseService.getUsers();
-  }
+  // async loadUsers() {
+  //   this.users = await this.databaseService.getUsers();
+  // }
 
   async ngOnInit() {
-    await this.databaseService.initDatabase();
-    this.loadUsers();
+    // await this.databaseService.initDatabase();
+    // this.loadUsers();
   }
 
   async deleteUser(user: User) {
@@ -36,13 +37,13 @@ export class UsersPage implements OnInit {
             console.log('Eliminación cancelada');
           }
         },
-        {
-          text: 'Eliminar',
-          handler: async () => {
-            await this.databaseService.deleteUser(user.email);
-            this.loadUsers();
-          }
-        }
+        // {
+        //   text: 'Eliminar',
+        //   handler: async () => {
+        //     await this.databaseService.deleteUser(user.email);
+        //     this.loadUsers();
+        //   }
+        // }
       ]
     });
 

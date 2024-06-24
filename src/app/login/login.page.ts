@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
-import { DatabaseService, User } from '../services/database.service';
+import { AuthService } from '../guard/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -15,12 +15,8 @@ export class LoginPage {
   constructor(
     private router: Router,
     private alertController: AlertController,
-    private databaseService: DatabaseService
+    private authService: AuthService
   ) {}
-
-  async ngOnInit() {
-    await this.databaseService.initDatabase();
-  }
 
   async onLogin() {
     if (!this.email || !this.password) {
@@ -29,14 +25,14 @@ export class LoginPage {
         message: 'Por favor ingrese su correo electrónico y contraseña.',
         buttons: ['OK']
       });
-
       await alert.present();
       return;
     }
 
     try {
-      const user = await this.databaseService.getUserByEmail(this.email);
-      if (user && user.password === this.password) {
+      const response = await this.authService.login(this.email, this.password).toPromise();
+      
+      if (response && response.success) {
         console.log('Login exitoso');
         this.router.navigate(['/home']);
       } else {

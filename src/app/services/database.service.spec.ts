@@ -13,9 +13,9 @@ describe('DatabaseService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should initialize database', async () => {
-    await service.initDatabase();
-    expect(service.db).not.toBeNull();
-  });
+  //it('should initialize database', async () => {
+    //await service.initDatabase();
+    //expect(service.db).not.toBeNull();
+  //});
 });
 

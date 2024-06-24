@@ -1,63 +1,76 @@
-import { Component, OnInit } from '@angular/core';
-import { NavController, AlertController } from '@ionic/angular';
-import { DatabaseService } from '../services/database.service';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { AlertController } from '@ionic/angular';
+import { AuthService } from '../guard/auth.service';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.page.html',
   styleUrls: ['./register.page.scss'],
 })
-export class RegisterPage implements OnInit {
+export class RegisterPage {
   email: string = '';
   password: string = '';
   confirmPassword: string = '';
 
   constructor(
-    private navCtrl: NavController,
+    private router: Router,
     private alertController: AlertController,
-    private databaseService: DatabaseService
-  ) { }
-
-  ngOnInit() { }
+    private authService: AuthService
+  ) {}
 
   async onRegister() {
     if (this.isFormValid()) {
       try {
-        await this.databaseService.addUser(this.email, this.password);
-        console.log('Usuario registrado:', this.email);
-        await this.presentRegistrationSuccessAlert();
-        this.navCtrl.navigateForward('/login');
+        const response = await this.authService.register(this.email, this.password).toPromise();
+        this.handleRegistrationResponse(response);
       } catch (error) {
-        console.error('Error al registrar usuario:', error);
-        await this.presentErrorAlert('Error al registrar usuario. Intente nuevamente.');
+        this.handleRegistrationError(error);
       }
-    } else {
-      console.error('Formulario no válido. Verifica los campos.');
-      await this.presentErrorAlert('Formulario no válido. Verifica los campos.');
     }
   }
 
-  isFormValid(): boolean {
-    return !!(this.email && this.password && this.confirmPassword && this.password === this.confirmPassword);
+  async onSubmit(): Promise<void> {
+    if (this.isFormValid()) {
+      try {
+        const response = await this.authService.register(this.email, this.password).toPromise();
+        this.handleRegistrationResponse(response);
+      } catch (error) {
+        this.handleRegistrationError(error);
+      }
+    }
   }
 
-  async presentRegistrationSuccessAlert() {
-    const alert = await this.alertController.create({
-      header: 'Registro Exitoso',
-      message: `Usuario ${this.email} registrado correctamente.`,
-      buttons: ['OK']
-    });
+  private handleRegistrationResponse(response: any): void {
+    if (response && response.id) {
+      console.log('Registro exitoso', response);
+      this.router.navigate(['/login']);
+    } else {
+      this.presentErrorAlert('Error en el registro. Por favor intente nuevamente.');
+    }
+  }
+  
 
-    await alert.present();
+  private handleRegistrationError(error: any): void {
+    console.error('Error al intentar registrar usuario:', error);
+    this.presentErrorAlert('Se produjo un error al intentar registrar usuario. Por favor intente nuevamente más tarde.');
   }
 
-  async presentErrorAlert(message: string) {
+  private async presentErrorAlert(message: string): Promise<void> {
     const alert = await this.alertController.create({
       header: 'Error',
-      message: message,
+      message,
       buttons: ['OK']
     });
-
     await alert.present();
+  }
+
+  onLogin() {
+    console.log('Ir a la página de login');
+    this.router.navigate(['/login']);
+  }
+
+  isFormValid(): boolean {
+    return !!this.email && !!this.password && this.password === this.confirmPassword;
   }
 }
