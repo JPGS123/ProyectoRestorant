@@ -1,0 +1,27 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Chefs</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen class="ion-padding">
+  <ion-card *ngIf="chefs && chefs.length">
+    <ion-card-header>
+      <ion-card-title>Listado de Chefs</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item *ngFor="let chef of chefs">
+          {{ chef.name.first }} {{ chef.name.last }} - Edad {{ chef.dob.age }} - Ciudad {{ chef.location.city }}
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+
+  <div *ngIf="!chefs || chefs.length === 0" class="ion-text-center">
+    <p>No se encontraron chefs.</p>
+  </div>
+</ion-content>

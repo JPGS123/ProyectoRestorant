@@ -4,6 +4,7 @@ import { AuthGuard } from './guard/auth.guard';
 import { HomePage } from './home/home.page';
 import { LoginPage } from './login/login.page';
 import { UsersPage } from './users/users.page';
+import { ChefsComponent } from './chefs/chefs.component';
 
 const routes: Routes = [
   
@@ -55,7 +56,11 @@ const routes: Routes = [
   {
     path: 'users',
     component: UsersPage
-  }
+  },
+  {
+    path: 'Chefs',
+    component: ChefsComponent
+  },
 ];
 
 @NgModule({

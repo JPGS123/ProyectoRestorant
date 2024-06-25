@@ -1,25 +1,22 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
     <ion-title>Perfil</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Perfil</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content fullscreen>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Tus Datos Personales</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item>
+        <ion-label>Correo Electrónico:</ion-label>
+        <ion-input [(ngModel)]="email" readonly></ion-input>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
 </ion-content>
-
-<ion-list>
-  <ion-item>
-    <ion-toggle>Receive Push Notifications</ion-toggle>
-  </ion-item>
-  <ion-item>
-    <ion-toggle>Receive Emails</ion-toggle>
-  </ion-item>
-  <ion-item>
-    <ion-toggle>Receive Text Messages</ion-toggle>
-  </ion-item>
-</ion-list>

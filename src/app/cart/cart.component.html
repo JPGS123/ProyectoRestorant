@@ -1,0 +1,15 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Carrito de Compras</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let item of cartItems">
+      {{ item.name }} - {{ item.price }}$
+      <ion-button slot="end" (click)="removeItem(item.id)">Eliminar</ion-button>
+    </ion-item>
+  </ion-list>
+  <ion-button expand="full" (click)="clearCart()">Vaciar Carrito</ion-button>
+</ion-content>

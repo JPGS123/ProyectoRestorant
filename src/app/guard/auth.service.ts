@@ -1,7 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { map } from 'rxjs/operators';
+
+export interface User {
+
+  email: string;
+  password: string;
+}
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +16,7 @@ export class AuthService {
   private apiUrl = 'http://localhost:3000/';
   private loggedIn = false;
   private accessTokenKey = 'accessToken';
+  private userSubject: BehaviorSubject<User | null> = new BehaviorSubject<User | null>(null);
 
   constructor(private http: HttpClient) {}
 
@@ -19,16 +26,24 @@ export class AuthService {
   }
 
   login(email: string, password: string): Observable<any> {
-    return this.http.get<any[]>(`${this.apiUrl}users`).pipe(
+    return this.http.get<any[]>(`${this.apiUrl}users?email=${email}&password=${password}`).pipe(
       map(users => {
-        const user = users.find(u => u.email === email && u.password === password);
-        if (user) {
-          return { success: true, user };
+        if (users.length > 0) {
+          const user = users[0];
+          const token = this.createToken(user.email);
+          this.saveAccessToken(token);
+          this.loggedIn = true;
+          return { success: true, user: { email: user.email, name: user.name } };
         } else {
           return { success: false };
         }
       })
     );
+  }
+
+
+  private createToken(email: string): string {
+    return btoa(email);
   }
 
   saveAccessToken(token: string): void {
@@ -52,5 +67,13 @@ export class AuthService {
   logout(): void {
     this.clearAccessToken();
     this.loggedIn = false;
+  }
+
+  getUserEmail(): string | null {
+    const token = this.getAccessToken();
+    if (token) {
+      return atob(token);
+    }
+    return null;
   }
 }
