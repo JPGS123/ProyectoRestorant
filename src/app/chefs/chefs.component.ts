@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ChefsService } from '../services/chefs.service';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 @Component({
   selector: 'app-chefs',

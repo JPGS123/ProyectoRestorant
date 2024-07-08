@@ -10,7 +10,7 @@ describe('CartService', () => {
     service = TestBed.inject(CartService);
   });
 
-  it('should be created', () => {
+  it('Se cargo el componente correctamente', () => {
     expect(service).toBeTruthy();
   });
 });

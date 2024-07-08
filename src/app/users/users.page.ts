@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 // import { DatabaseService, User } from '../services/database.service';
-import { User } from '../services/database.service'; // Solo importa la interfaz User si la necesitas
+import { User } from '../services/database.service';
 
 @Component({
   selector: 'app-users',

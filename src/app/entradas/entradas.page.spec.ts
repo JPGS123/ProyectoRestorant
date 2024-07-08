@@ -11,7 +11,9 @@ describe('EntradasPage', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  it('Se Creo el componente correctamente', () => {
+    const fixture = TestBed.createComponent(EntradasPage);
+    const app = fixture.debugElement.componentInstance;
+    expect(app).toBeTruthy();
   });
 });

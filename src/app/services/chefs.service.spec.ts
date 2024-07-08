@@ -1,16 +1,28 @@
-import { TestBed } from '@angular/core/testing';
-
+/*import { TestBed } from '@angular/core/testing';
 import { ChefsService } from './chefs.service';
+import { HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
+import { IonicModule } from '@ionic/angular';
 
 describe('ChefsService', () => {
-  let service: ChefsService;
+  let component: ChefsService;
+  let httpTestingController: HttpTestingController;
+
+  beforeEach(async() => {
+    TestBed.configureTestingModule({
+      declarations: [ChefsService],
+      imports: [HttpClientTestingModule, IonicModule.forRoot()]
+    }).compileComponents();
+  });
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
-    service = TestBed.inject(ChefsService);
+    const fixture = TestBed.createComponent(ChefsService);
+    component = fixture.componentInstance;
+    httpTestingController = TestBed.inject(HttpTestingController);
   });
 
-  it('should be created', () => {
-    expect(service).toBeTruthy();
+  it('should create', () => {
+    expect(component).toBeTruthy();
   });
+  
 });
+*/

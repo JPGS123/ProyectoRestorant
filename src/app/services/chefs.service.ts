@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ChefsService {
-  private apiUrl = 'https://randomuser.me/api/?nat=CA&results=20';
+  private apiUrl = 'https://randomuser.me/api/?nat=CA&results=5';
 
   constructor(private http: HttpClient) {}
 
